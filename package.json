@@ -7,7 +7,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "yarn": "^1.22.22"
   },
   "name": "ticket-box",
   "version": "1.0.0",

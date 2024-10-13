@@ -76,10 +76,10 @@ class Database {
     // }
 }
 
-dotenv.config()
+// dotenv.config()
 const dbUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017'
 console.log(dbUrl)
-const myDb = new Database(dbUrl, 'TicketBox')
+// const myDb = new Database(dbUrl, 'TicketBox')
 
 const connectDB = async () => {
     try {
@@ -90,6 +90,6 @@ const connectDB = async () => {
         console.log(error)
     }
 }
-connectDB()
+// connectDB()
 
-export default myDb
+// export default myDb
