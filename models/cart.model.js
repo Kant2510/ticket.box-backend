@@ -13,7 +13,7 @@ const cartItemSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema(
     {
-        userID: {
+        customerID: {
             type: mongoose.ObjectId,
             required: true,
         },

@@ -2,7 +2,7 @@ import Cart from '../models/cart.model.js'
 
 const getCart = async (req, res) => {
     try {
-        const cart = await Cart.findOne({ userID: req.userId })
+        const cart = await Cart.findOne({ customerID: req.userId })
         res.json(cart)
     } catch (error) {
         console.error('Error in getting cart: ', error.message)
@@ -13,7 +13,7 @@ const getCart = async (req, res) => {
 const addToCart = async (req, res) => {
     try {
         const { ticketID, quantity } = req.body
-        const cart = await Cart.findOne({ userID: req.userId })
+        const cart = await Cart.findOne({ customerID: req.userId })
         if (cart) {
             const index = cart.items.findIndex(
                 (item) => item.ticketID.toString() === ticketID,
@@ -28,7 +28,7 @@ const addToCart = async (req, res) => {
             await cart.save()
         } else {
             const newCart = new Cart({
-                userID: req.userId,
+                customerID: req.userId,
                 items: [{ ticketID, quantity }],
             })
             await newCart.save()

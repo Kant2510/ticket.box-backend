@@ -1,6 +1,6 @@
 // import User from '../models/user.model.js'
 // import myDb from '../models/database.js';
-import User from '../models/user.model.js'
+import Customer from '../models/customer.model.js'
 import jwt from 'jsonwebtoken'
 
 const authLogin = async (req, res) => {
@@ -14,12 +14,12 @@ const authLogin = async (req, res) => {
                 .send({ message: 'Missing email or password!' })
         }
         const hased_password = password + '_hased'
-        // const User = myDb.createCollection('User')
-        const matchUser = await User.findOne({ Emai: email })
-        const matchPass = await User.findOne({
+        // const Customer = myDb.createCollection('Customer')
+        const matchCustomer = await Customer.findOne({ Emai: email })
+        const matchPass = await Customer.findOne({
             Password: hased_password,
         })
-        if (!matchUser) {
+        if (!matchCustomer) {
             return response
                 .status(400)
                 .send({ message: 'Email does not exist!' })
@@ -52,29 +52,29 @@ const authRegister = async (req, res) => {
         }
 
         const hased_password = password + '_hased'
-        // const User = myDb.createCollection('User');
+        // const Customer = myDb.createCollection('Customer');
 
-        const newUser = req.body
-        newUser.password = hased_password
-        console.log(newUser)
+        const newCustomer = req.body
+        newCustomer.password = hased_password
+        console.log(newCustomer)
 
-        const user = new User(newUser)
-        await user.save()
+        const customer = new Customer(newCustomer)
+        await customer.save()
 
         const accessToken = jwt.sign(
-            { _id: user._id, email: user.email },
+            { _id: customer._id, email: customer.email },
             process.env.SECRET_ACCESS,
         )
         const refreshToken = jwt.sign(
-            { _id: user._id, email: user.email },
+            { _id: customer._id, email: customer.email },
             process.env.SECRET_REFRESH,
             {
                 expiresIn: '7d',
             },
         )
 
-        user.refreshToken = refreshToken
-        await user.save()
+        customer.refreshToken = refreshToken
+        await customer.save()
 
         // res.json({
         //     success: true,
@@ -84,7 +84,7 @@ const authRegister = async (req, res) => {
         res.status(201).json({
             success: true,
             message: 'Register successfully',
-            data: user,
+            data: customer,
             accessToken,
             refreshToken,
         })

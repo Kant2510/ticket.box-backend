@@ -17,7 +17,7 @@ const orderDetailSchema = new mongoose.Schema({
 
 const orderSchema = new mongoose.Schema(
     {
-        userID: {
+        customerID: {
             type: mongoose.ObjectId,
             required: true,
         },
