@@ -2,7 +2,7 @@ import Order from '../models/order.model.js'
 
 const getOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ userID: req.userId })
+        const orders = await Order.find({ customerID: req.userId })
         res.json(orders)
     } catch (error) {
         console.error('Error in getting orders: ', error.message)
@@ -17,7 +17,7 @@ const createOrder = async (req, res) => {
             return res.status(400).json({ message: 'Missing information' })
         }
         const newOrder = new Order({
-            userID: req.userId,
+            customerID: req.userId,
             orderDate,
             totalPrices,
             orderDetails,
